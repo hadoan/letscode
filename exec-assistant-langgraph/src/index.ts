@@ -19,6 +19,14 @@ async function demo() {
   });
   console.log("\n=== Example 2 ===");
   for (const m of res2.messages) console.log(m.content);
+
+
+  // Example 2: quick update → Slack DM tool
+  const res3 = await app.invoke({
+    messages: [new HumanMessage("write a twitter status about lazy")],
+  });
+  console.log("\n=== Example 3 ===");
+  for (const m of res3.messages) console.log(m.content);
 }
 demo().catch((e) => {
   console.error(e);
