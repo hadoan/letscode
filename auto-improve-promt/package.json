@@ -1,0 +1,23 @@
+{
+  "name": "auto-improve-promt",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Prompt auto-improvement utilities and dataset",
+  "type": "module",
+  "scripts": {
+    "dev": "node --loader ts-node/esm index.ts",
+    "start": "node --loader ts-node/esm index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"No tests\" && exit 0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.8.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "i": "^0.3.7",
+    "npm": "^11.6.2",
+    "openai": "^6.7.0"
+  }
+}
