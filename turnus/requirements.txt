@@ -1,0 +1,6 @@
+langchain
+langgraph
+langchain-openai
+langchain-anthropic
+langfuse
+pydantic

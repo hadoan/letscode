@@ -6,3 +6,6 @@ node_modules/
 .DS_Store
 modal/__pycache__/
 venv/
+turnus/__pycache__/
+turnus/nodes/__pycache__/
+turnus/docs/
