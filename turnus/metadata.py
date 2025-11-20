@@ -1,7 +1,10 @@
 import json
+import logging
 from typing import Optional
 
 from state import Priority
+
+logger = logging.getLogger(__name__)
 
 
 def extract_email_metadata_with_llm(email: dict, llm) -> tuple[Optional[str], Priority]:
@@ -24,10 +27,12 @@ def extract_email_metadata_with_llm(email: dict, llm) -> tuple[Optional[str], Pr
 
     Respond in JSON with keys: "due_date", "priority".
     """
+    logger.info("Extracting metadata for email from=%s subject=%s", email.get("from"), email.get("subject"))
     try:
         resp = llm.invoke(prompt)
     except Exception as exc:
         print(f"[warn] LLM metadata extraction failed ({exc}); falling back to defaults.")
+        logger.warning("LLM metadata extraction failed: %s", exc)
         return None, "normal"
     due_date: Optional[str] = None
     priority: Priority = "normal"
@@ -43,5 +48,7 @@ def extract_email_metadata_with_llm(email: dict, llm) -> tuple[Optional[str], Pr
                 priority = priority_candidate  # type: ignore[assignment]
     except Exception:
         # Fall back to defaults if parsing fails.
+        logger.warning("Failed to parse LLM metadata response; using defaults.")
         pass
+    logger.info("Metadata extracted due_date=%s priority=%s", due_date, priority)
     return due_date, priority
